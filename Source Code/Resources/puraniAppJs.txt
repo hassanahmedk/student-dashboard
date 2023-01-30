@@ -1,0 +1,513 @@
+const { urlencoded, response } = require("express");
+const express = require("express");
+var session = require("express-session");
+var path = require("path");
+const sql = require("mssql");
+
+const {default:knex} = require("knex");
+const tedious = require("tedious");
+const app = express();
+
+// acting as body-parser
+app.use(express.urlencoded({extended:true}));
+
+// Adding stylesheet and other media
+app.use(express.static(__dirname));
+
+// EJS
+app.set('view engine', 'ejs');
+
+
+app.use(session({
+    secret: 'Secret',
+    resave: true,
+    saveUninitalized: true
+  
+  }));
+
+
+ 
+var config = {
+    user: 'hassan',
+    password: 'mssql123',
+    server: 'DESKTOP-H10754P', 
+    database: 'eManageDB',
+    port: 1433,
+    trustServerCertificate: true,
+    option: {
+        encrypt: false,
+        useUTC: true,
+    }
+}
+
+
+
+var loginStatus = "";
+var loggedIn = false;
+var loggedInUsername = "NULL";
+
+var searchName = "";
+var searchID = "";
+var searchSpec = "";
+var searchSalary = "";
+var searchWstatus = "";
+var searchNationility = "";
+var searchManager = "";
+
+
+var profileName = "";
+var profileID = "";
+var profileDOB = "";
+var profileCNIC = "";
+var profilePhone = "";
+var profileAddress = "";
+var profileAccNo = "";
+var profileTitle = "";
+var profileSalary = "";
+var profileWstatus = "";
+var profileNationility = "";
+var profileManager = "";
+
+
+
+app.get("/", function(req,res){
+
+    logina("EMP001").then(function(result){
+        res.send(result);
+    })
+});
+
+async function logina(username){
+
+    var database = new sql.ConnectionPool(config);
+    let data = await database.connect();
+    let result = await data.query("SELECT * FROM Developer where DevID = '" + username + "'");
+
+            return result;
+
+}
+
+
+// app.get("/", function(req,res){
+//     res.render("login", {pLoginStatus: loginStatus});
+    
+// });
+
+
+
+app.get("/landing", function(req,res){
+    if (loggedIn===true){
+        res.render("landing", {pLoggedInUsername: loggedInUsername});
+
+    } else {
+        res.redirect("/");
+    }
+});
+
+
+app.get("/add", function(req,res){
+    if (loggedIn===true){
+        res.render("add");
+    } else {
+        res.redirect("/");
+    }
+});
+
+
+app.get("/search", function(req,res){
+    setTimeout(() => {
+        if (loggedIn===true){
+            res.render("search", {
+                pSearchName: searchName,
+                pSearchID: searchID,
+                pSearchSpec: searchSpec,
+                pSearchSalary: searchSalary,
+                pSearchWstatus: searchWstatus,
+                pSearchNationility: searchNationility,
+                pSearchManager: searchManager
+            });
+        } else {
+            res.redirect("/");
+        }
+        
+    }, 5000);
+});
+
+
+
+app.get("/profile", function(req,res){
+
+
+    setTimeout(() => {
+        if (loggedIn===true){
+            res.render("search", {
+                pSearchName: searchName,
+                pSearchID: searchID,
+                pSearchSpec: searchSpec,
+                pSearchSalary: searchSalary,
+                pSearchWstatus: searchWstatus,
+                pSearchNationility: searchNationility,
+                pSearchManager: searchManager
+            });
+        } else {
+            res.redirect("/");
+        }
+        
+    }, 5000);
+    
+    
+});
+
+
+
+
+app.get("/e", function(req,res){
+    process.exit(1);
+});
+
+
+
+
+
+
+
+app.post("/", function(req,res){
+    let username = req.body.loginUsername;
+    let password = req.body.loginPassword;
+
+    login(username, password).then(
+        function(result){
+            if(result!==0){ // that means name returned, and no error occured
+                loggedIn = true; 
+                loggedInUsername = name;
+                res.redirect("/landing");
+            } else {
+                res.redirect("/");
+            }
+        }
+    );   
+});
+
+
+
+
+app.post("/add", function(req, res){
+    let input = req.body;
+
+    
+
+    async function doa(){
+        let database = new sql.ConnectionPool(config);
+        let data = await database.connect();
+        let query = await data.query("INSERT INTO Developer VALUES('" + input.devid + "','" + input.cnic +"','" + input.password +"','"+input.fname+"','"+input.lname+"','"+input.address+"','"+input.phone+"','"+input.accno+"',"+input.salary+",'"+input.nationility+"','"+"input.wstatus"+"','"+input.speciality+"','"+input.mid+"' )");
+        return query;
+    }
+    doa().then(function(){
+        res.send("Successfully Added new User");
+    });
+
+});
+
+app.post("/search", function(req, res){
+    let input = req.body.searchQuery;
+    async function doa(){
+        let database = new sql.ConnectionPool(config);
+        let data = await database.connect();
+        let query = await data.query("SELECT * FROM Developer WHERE DevID='" + input + "'");
+        return query;
+    }
+    doa().then(function(result){
+        let output = result.recordsets[0][0];
+        searchName = output.DevFirstName + " " + output.DevLastName;
+        searchID = output.DevID;
+        searchSpec = output.DevSpeciality;
+        searchSalary = output.DevSalary;
+        searchWstatus = output.DevWorkingStatus;
+        searchNationility = output.DevNationility;
+        searchManager = output.MID;
+        res.redirect("/search");
+    }).catch(
+        function(){
+            searchName = "No Results Found!";
+            searchID = "";
+            searchSpec = "";
+            searchSalary = "";
+            searchWstatus = "";
+            searchNationility = "";
+            searchManager = "";
+            res.redirect("/search"); 
+        }
+    );
+
+});
+
+
+
+
+async function login(username, password){
+
+    var database = new sql.ConnectionPool(config);
+    let data = await database.connect();
+    let result = await data.query("SELECT DevPassword, DevFirstName, DevLastName FROM Developer where DevID = '" + username + "'");
+
+        if(result.recordset.length === 0){      // means user doesn't exists as it doesn't return any row
+            loginStatus = "This user doesn't exist";
+            database.close();
+            return 0;
+
+        } else if(result.recordset[0].DevPassword === password){
+            let fname = result.recordsets[0][0].DevFirstName;   // change it acc to orig database
+            let lname = result.recordsets[0][0].DevLastName;    // change it 
+            database.close();
+            return fname + " " + lname;
+        } else {
+            loginStatus = "You entered an incorrect password";
+            database.close();
+            return 0;
+        }
+
+}
+
+
+
+async function getData(){
+
+    return query;
+}
+
+
+app.listen(3000, function(){
+    console.log("Server running at port 3000");
+});
+
+
+
+
+
+
+
+
+//    insertData("UserLogin", "('" + username1 + "','" + password1 + "')"); 
+
+function insertData(table, values){
+    databaseConnect
+        .then(pool => {
+            return pool.query("INSERT INTO " + table + " VALUES " + values);
+        }).then(result => {
+            console.log(result);
+            database.close();
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /* var database = new sql.ConnectionPool(config);
+
+  database
+      .connect()
+      .then(pool => {
+          return pool.query("SELECT * FROM Student");
+      }).then(result => {
+          res.send(result);
+          return result;
+          database.close();
+      })
+
+      .catch((err) => {
+          console.log(err);
+      });*/
+  
+
+    
+   
+
+    // SHIT THAT WORKS!!    //
+
+    
+
+    // function getData(column, table){
+    //     var database = new sql.ConnectionPool(config);
+    //     var ans= 11;
+    //     database
+    //         .connect()
+    //         .then(pool => {
+    //             return pool.query("SELECT " + column + " FROM " + table);
+    //         }).then(result => {
+    //             //console.log(result);
+    //             ans = result.recordsets[0][3].StdNo;
+    //             console.log(ans);
+    //             database.close();
+    //         })
+    
+    //         .catch((err) => {
+    //             console.log(err);
+    //         });
+    //         return ans;
+    
+    // }
+
+
+
+
+        // connect to your database
+    //     sql.connect(config, function (err) {
+        
+    //         if (err) console.log(err);
+
+    //         var conn = new sql.ConnectionPool(config);
+    //         // create Request object
+    //         var request = new sql.Request(conn);
+            
+    //         // query to the database and get the records
+    //         request.query('select * from Student', function (err, recordset) {
+                
+    //             if (err) console.log(err)
+
+    //             // send records as a response
+    //             res.send(recordset);
+                
+    //         });
+    // });
+
+
+
+
+
+    // var connection = new sql.ConnectionPool(config);
+    // connection.connect();
+
+    // var request = new sql.Request(connection);
+
+    // var sqlquery = "SELECT * FROM Student";
+    // request.query(sqlquery, function (err, recordset) {
+    //     if (err)
+    //     res.send(err);
+    //     else
+    //     res.send(recordset);
+    // });
+
+
+
+   
+            // sqlInstance.connect(setUp)
+            //     .then(function () {
+            //         // Function to retrieve all the data - Start
+            //         new sqlInstance.Request()
+            //             .query("select * from Course")
+            //             .then(function (dbData) {
+            //                 if (dbData == null || dbData.length === 0)
+            //                     return;
+            //                 console.dir('All the courses');
+            //                 console.dir(dbData);
+            //             })
+            //             .catch(function (error) {
+            //                 console.dir(error);
+            //         });
+
+                    
+                    // sql.connect(config).then(function (err) {
+                    //     var sqlrequest = new sql.Request();
+                    //     sqlrequest.query("SELECT * from Student").then(function (recordset) {
+                    //         sql.close(function (value) {
+                    //           console.log("connection6 closed");
+                    //         });
+                    //         return res.status(200).send(recordset);
+        // async function getData(column, table){
+//     try{
+//         var database = new sql.ConnectionPool(config);
+//         let data = await database.connect();
+//         let query = await data.pool.query("SELECT " + column + " FROM " + table);
+//         return await sql.pool.result;
+        
+//     } catch(e){
+//         return e;
+//     }
+                    //     }).catch(function (err) {
+                    //         console.log(err);
+                    //     });
+                    // }).catch(function (err) { 
+                    //     console.log(err);
+                    // });
+                
+      
+        
+      
+     
+// }  
+
+
+// app.post("/", function(req,res){
+    //     let username = req.body.loginUsername;
+    //     let password = req.body.loginPassword;
+    
+    //     // Due to the asynchronous nature of the following code, it can't be used as a returning function
+    //     databaseConnect
+    //         .then(pool => {
+    //             return pool.query("SELECT password FROM UserLogin where username = '" + username + "'");
+    //         }).then(result => {
+               
+    //             if(result.recordset.length === 0){      // means user doesn't exists as it doesn't return any row
+    //                 loginStatus = "This user doesn't exist";
+    //                 res.redirect("/");
+    //             } else if(result.recordset[0].password === password){
+    //                 loggedIn = true; 
+    //                 let fname = result.recordsets[0][0].DevFirstName;   // change it acc to orig database
+    //                 let lname = result.recordsets[0][0].DevLastName;    // change it 
+    //                 loggedInUsername = lname + fname;
+    //                 console.log(lname);
+    //                 res.redirect("/landing");
+    //             } else {
+    //                 loginStatus = "You entered an incorrect password";
+    //                 res.redirect("/");
+    //             }
+    //             database.close();
+    //         })
+    //         .catch((err) => {
+    //             console.log(err);
+    //         }); 
+    
+    // });

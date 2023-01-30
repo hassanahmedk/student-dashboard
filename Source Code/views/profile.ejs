@@ -1,0 +1,144 @@
+<%- include("header.ejs") -%> 
+<%- include("nav.ejs") -%> 
+
+        <div id="landing">
+
+            <div class="profile-landing-inner">
+
+                <div class="user-landing-top">
+
+                    <!-- <div class="user-landing_dp"> -->
+                    <img class="user-placeholder" src="../public/icons/profile-user-placeholder.svg" alt="">
+                    <!-- </div> -->
+
+                    <div class="user-landing_text">
+                        <h2 class="profile_name">
+                            <%= tName %>
+                        </h2>
+                        <div class="profile_combo">
+                            <p class="profile_ID">
+                                <%= tID %>
+                            </p>
+                            <p class="profile_title">
+                                <%= tTitle %>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="user-landing-bottom">
+
+                    <table class="user-info-table">
+                        <tr class="profile_dob">
+                            <td>
+                                Date of Birth:
+                            </td>
+                            <td></td> <!-- for spacing -->
+                            <td>
+                                <%= tDOB %>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td> </td>
+                        </tr>
+                        <tr class="profile_cnic">
+                            <td>
+                                CNIC:
+                            </td>
+                            <td></td> <!-- for spacing -->
+                            <td>
+                                <%= tCNIC %>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="profile_phone">
+                            <td>
+                                Phone:
+                            </td>
+                            <td></td> <!-- for spacing -->
+                            <td>
+                                <%= tPhone %>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="profile_address">
+                            <td>
+                                Address:
+                            </td>
+                            <td></td> <!-- for spacing -->
+                            <td>
+                                <%= tAddress %>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><a href="http://localhost:3000/updateAddress"><i class="fas fa-pen"></i></a></td>
+                        </tr>
+                        <tr class="profile_accno">
+                            <td>
+                                Account No:
+                            </td>
+                            <td></td> <!-- for spacing -->
+                            <td>
+                                <%= tAccount %>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><a href="http://localhost:3000/updateAccount"><i class="fas fa-pen"></i></a></td>
+                        </tr>
+                        <tr class="profile_salary">
+                            <td>
+                                Salary:
+                            </td>
+                            <td></td> <!-- for spacing -->
+                            <td>
+                                <%= tSalary %>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="profile_wstatus">
+                            <td>
+                                Work Status:
+                            </td>
+                            <td></td> <!-- for spacing -->
+                            <td>
+                                <%= tWStatus %>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="profile_nationility">
+                            <td>
+                                Nationility:
+                            </td>
+                            <td></td> <!-- for spacing -->
+                            <td>
+                                <%= tNationility %>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    <%- include("side.ejs") -%>
+ 
+<%- include("footer.ejs") -%> 

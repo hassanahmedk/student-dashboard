@@ -1,0 +1,44 @@
+<%- include("header.ejs") -%> 
+
+<%- include("nav.ejs") -%> 
+
+
+        <div id="landing">
+            <h1 id="add-user">Add Developer</h1>
+
+            <div id="add-form">
+                <form action="add" method="post" class="add">
+<!-- NULL specifiers  -->
+                    <div class="add-form-inner">
+
+                    
+                        <input type="text" class="add" name="fname" placeholder="First Name*" required>
+                        <input type="text" class="add" name="lname" placeholder="Last Name*" required>
+                        <!-- class:deco-svg  -->
+                        <!-- <img class="deco-svg add-svg-1" src="../public/icons/login-1.svg" alt=""> -->
+                        <input type="text" class="add" name="devid" placeholder="Dev ID*" required>
+                        <input type="text" class="add" name="password" placeholder="Password (Assigned initially by the manager*" required>
+                        <input type="text" class="add" name="phone" placeholder="Phone*" required>
+                        <input type="text" class="add" name="cnic" placeholder="CNIC*" required>
+                        <input type="text" class="add add-address" name="address" placeholder="Address">
+                        <input type="text" class="add" name="accno" placeholder="Account No">
+                        <input type="text" class="add" name="salary" placeholder="Salary">
+                        <input type="text" class="add" name="nationility" placeholder="Nationality">
+                        <select name="wstatus">
+                            <option value="">-- Select One --</option>
+                            <option value="On-Site">On-Site</option>
+                            <option value="Virtual">Virtual</option>
+                            <option value="Hybrid">Hybrid</option>
+                        </select>                        
+                        <input type="text" class="add" name="speciality" placeholder="Speciality">
+                        <input type="text" class="add" name="mid" placeholder="Managed By (Manager ID)*" required>
+                    
+                    </div>
+                    <button class="add-button btn btn-outline-dark" type="submit">Add Developer</button>
+                </form>
+            </div>
+
+        </div>
+
+<%- include("side.ejs") -%>
+<%- include("footer.ejs") -%> 

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <style>
+        *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+/* .container{
+    height: 100%;
+    width: 100%;
+    background-color: black;
+} */
+body{
+    background-color: rgb(224, 224, 224);
+}
+.d-flex,.display-flex{
+    display: flex;
+}
+.f-grow-1{
+    flex-grow: 1;
+}
+.d-block,.display-block{
+    display: block;
+}
+.d-inline{
+    display: inline;
+}
+.greyText{
+    color: gray;
+}
+.blueText{
+    color: rgb(85, 85, 255);
+}
+.centerText{
+    text-align: center;
+}
+.my-2{
+    margin: 0.6em 0;
+}
+.my-3{
+    margin: 1.8em 0 0 0;
+}
+.decoNone{
+    text-decoration: none;
+}
+#software-house-heading{
+    font-size: 2.3rem;
+    width: fit-content;
+    color:olive;
+    margin: 1rem auto;
+}
+#login-container{
+    margin: 2.5em 7em 0 7em;
+    /* border: 2px solid blue; */
+}
+#loginLeft{
+    /* padding: 3em 4em 4em 4em; */
+    padding: 3% 4% 4% 4%;
+    width: 80%;
+    background-color: white;
+}
+.fa-key,
+.fa-user-circle,
+.fa-facebook-square,
+.fa-twitter,
+.fa-google{
+    border: 2px solid rgb(211, 211, 211);
+    padding:0.2em;
+    cursor: pointer;
+    font-size: 1.3rem;
+}
+.input{
+    padding:0.5em 0.6em 0.5em 0.5em;
+    margin: 0.74em 0 0.5em 0;
+    height: 2.1em;
+    width: 80%;
+    font-size: 1em;
+    outline: none;
+    border: 2px solid rgb(211, 211, 211);
+}
+.fa-eye{
+    margin-left: -33px; 
+    cursor: pointer;
+}
+
+#checkBox{
+    margin: 0.1rem 0.3rem;
+    cursor: pointer;
+}
+#loginBtn{
+    padding: 3%;
+    width: fit-content;
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 0.24rem;
+    text-decoration: none;
+    background-color: rgb(73, 73, 255);
+}
+#forgotPassword{
+    width: fit-content;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+#loginFromSiteContainer{
+    display: grid;
+    grid-template-columns:80%;
+    grid-template-rows: 3.1rem 3.2rem 3.2rem;
+    margin-top:1.3em;
+}
+.loginFromSite{
+    margin: 0.8rem 0 0 0;
+    text-align: center;
+}
+.siteIcons{
+    display: inline-block;
+    padding: 0.3em 0.4em;
+    border-radius: 0.3em;
+}
+.fa-facebook-square{
+    background-color: blue;
+    color: white;
+}
+.fa-twitter{
+    background-color: skyblue;
+    color: white;
+}
+.fa-google{
+    background-color: red;
+    color:white;
+}
+.siteLogins{
+    padding: 0.6rem 0;
+    color: white;
+    display: inline-block;
+    width: 80%;
+    text-decoration: none;
+    border-radius: 0.3rem;
+}
+#facebookLogin{
+    background-color: blue;
+    color: white;
+}
+#twitterLogin{
+    background-color: skyblue;
+    color: white;
+}
+#googleLogin{
+    background-color: red;
+    color: white;
+}
+#loginRightImage{
+    max-width: 100%;
+    height: 100%;
+}
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 id="software-house-heading">SOFTWARE HOUSE MANAGEMENT SYSTEM</h1>
+        <div id="login-container" class="d-flex">
+            <div id="loginLeft">
+                <div class="d-block">
+                    <i class="fas fa-user-circle icons"></i>
+                    <input type="email" 
+                     name="email" id="email" class="input" placeholder="Username or email">
+                </div>
+                <div>
+                    <i class="fas fa-key icons" style="color:black;"></i>
+                    <input type="password" name="password" id="password" class="input" placeholder="Password">
+                    <i class="far fa-eye" id="togglePassword"></i>
+                </div>
+                <div class="d-flex my-2" style="width:90%">
+                    <div class="f-grow-1">
+                        <input type="checkbox" name="checkBox" id="checkBox">
+                        <span class="greyText">Remember me</span>
+                    </div>
+                    <a href="#" id="loginBtn">LOGIN</a>
+                </div>
+                <div class="d-flex my-2" style="width:90%">
+                    <div class="f-grow-1">
+                        <a href="#" class="blueText decoNone" style="font-weight: bold;">Register Now</a>
+                    </div>
+                    <a href="#" id="forgotPassword" class="greyText">Forgot Password?</a>
+                </div>
+                <div class="centerText my-3">
+                    <span class="greyText">____  or _____</span>
+                </div>
+                <div id="loginFromSiteContainer">
+                    <div class="loginFromSite">
+                        <i class="fab fa-facebook-square icons siteIcons"></i>
+                        <a href="#" id="facebookLogin" class="siteLogins"> LOGIN WITH FACEBOOK</a>
+                    </div>
+                    <div class="loginFromSite">
+                        <i class="fab fab fa-twitter icons siteIcons"></i>
+                        <a href="#" id="twitterLogin" class="siteLogins"> LOGIN WITH TWITTER</a>
+                    </div>
+                    <div class="loginFromSite">
+                        <i class="fab fab fa-google icons siteIcons"></i>
+                        <a href="#" id="googleLogin" class="siteLogins"> LOGIN WITH GOOGLE</a>
+                    </div>
+                </div>
+            </div>
+            <div id="loginRight">
+                <img src="/login Background.jpg" alt="Login Page" id='loginRightImage'>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

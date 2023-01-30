@@ -1,0 +1,55 @@
+<%- include("header.ejs") -%> 
+
+<%- include("nav.ejs") -%> 
+
+
+    <div id="landing">
+        <form class="search-section" action="/search" method="post">
+            <div class="searchbar-div">
+                <input class="searchbar" type="search" name="searchQuery" placeholder="Input User ID to search"> 
+            </div>
+            <button class="search-button btn btn-outline-dark" type="submit"><i class="fas fa-search"></i> Search</button>
+        </form>
+
+
+        <img class="deco-svg search-svg-1" src="../public/icons/search-1.svg" alt="">
+    <!-- if condition if search found is tree then only box -->
+        <div class="search-results">
+            <h2 class="search-results-heading">
+                Search Results:
+            </h2>
+
+            <div class="search-results-inner">
+                <h3 class="search-results_name">
+                    <%= pSearchName %>
+                </h3>
+                <p class="search-results_id">
+                    <%= pSearchID %>
+                </p>
+                <p class="search-results_speciality">
+                    <%= pSearchSpec %>
+                </p>
+                <p class="search-results_salary">
+                    <%= pSearchSalary %>
+                </p>
+                <div class="search-results_combo">
+                    <p class="search-results_wstatus">
+                        <%= pSearchWstatus %>
+                    </p>
+                    <p class="search-results_nationility">
+                        <%= pSearchNationility %>
+                    </p>
+                </div>
+                <p class="search-results_manager">
+                    <%= pSearchManager %>
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+<%- include("side.ejs") -%> 
+<%- include("footer.ejs") -%> 

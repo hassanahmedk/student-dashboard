@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<body>
+<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
+<script>
+var yValues = [3.6,3.7,3.5,3.8,3.6];
+var xValues = [1,2,3,4,5];
+var yValuesAvg = [3.2,3.3,2.8,3.0,2.6];
+
+new Chart("myChart", {
+  type: "line",
+  data: {
+    labels: xValues,
+    datasets: [{
+      fill: false,
+      lineTension: 0,
+      backgroundColor: "rgba(0,0,255,1.0)",
+      borderColor: "rgba(0,0,255,0.1)",
+      data: yValues
+    }, {
+      fill: false,
+      lineTension: 0,
+      backgroundColor: "rgba(0,0,25,0.2)",
+      borderColor: "rgba(0,0,255,0.1)",
+      data: yValuesAvg
+    }]
+  },
+  options: {
+    legend: {display: false},
+    scales: {
+      yAxes: [{ticks: {min: 1, max:4}}],
+    }
+  }
+});
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<body>
+
+<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
+<script>
+var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+var yValues = [55, 49, 44, 24, 15];
+var barColors = ["rgba(0,0,0,0.5)", "green","blue","orange","brown"];
+
+new Chart("myChart", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "World Wine Production 2018"
+    },
+    scales: {
+
+      yAxes: [{
+        display: true,
+        ticks: {
+          beginAtZero: false,
+          steps: 10,
+          stepValue: 5,
+          max: 100
+        }
+      }]
+    }
+  }
+});
+</script>
+
+</body>
+</html>

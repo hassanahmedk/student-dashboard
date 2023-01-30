@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!-- Personal StyleSheet -->
+    <link rel="stylesheet" href="../public/css/style.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;700&family=Raleway:wght@200;400;500;700&family=Satisfy&display=swap"
+        rel="stylesheet">
+
+
+</head>
+
+<body>
+
+
+    <div id="login-screen">
+
+
+        <div class="landing-login">
+            <img class="deco-svg login-svg-1" src="../public/icons/login-1.svg" alt="">
+
+        </div>
+
+        <div class="form-login">
+            <img class="deco-svg login-svg-2" src="../public/icons/login-form-1.svg" alt="">
+            <div class="form-login-inner">
+                <form id="login" action="/" method="post">
+
+                    <div class="login-checkbox">
+                        <input type="radio" name="login-dev" class="checkbox-dev">
+                        <label for="login-dev" class="login-checkbox_label label-dev">
+                            <img class="checkbox-img checkbox-img_dev" title="Login as Developer"
+                                src="../public/icons/login-dev.svg" alt="">
+                        </label>
+
+                        <input type="radio" name="login-manager" class="checkbox-manager">
+                        <label for="login-manager" class="login-checkbox_label label-manager">
+                            <img class="checkbox-img checkbox-img_manager" title="Login as Manager"
+                                src="../public/icons/login-manager.svg" alt="">
+                        </label>
+                    </div>
+
+                    <div class="login-fields">
+
+                        <!-- <div class="login-fields-box"> -->
+                        <input class="login-fields-input login-username" name="loginUsername" type="text" autocomplete="off">
+                        <!-- <span class="login-placeholder_un">Username</span> -->
+                        <!-- </div> -->
+
+                        <!-- <div class="login-fields-box"> -->
+                        <input class="login-fields-input login-password" name="loginPassword" type="password">
+                        <!-- <span class="login-placeholder_pass">Password</span> -->
+                        <!-- </div> -->
+                        <button class="login-button" type="submit">Log me in!</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+

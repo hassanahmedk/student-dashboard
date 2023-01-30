@@ -1,0 +1,175 @@
+<%- include("header.ejs") -%> <%- include("nav.ejs") -%>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js">
+</script>
+
+
+<div id="landing">
+  <!-- Hi <%= aProfileName %>
+  <a href="http://localhost:3000/list">Display all Developers</a> -->
+  <!-- <img
+    class="deco-svg search-svg-1"
+    src="../public/icons/search-1.svg"
+    alt=""
+  /> -->
+
+  <div class="landing-info">
+    <div class="landing-info-left">
+      <div class="landing-info-pp">
+        <img src="../public/profile-pics/S00320.jpg" alt="profile-pic" />
+      </div>
+      <div class="landing-info-text">
+        <h1 class="landing-info-name">Hassan Ahmed Khan</h1>
+        <p class="landing-info-id">
+          S00320 <span>-</span> <span>BE Software Eng</span>
+        </p>
+        <p class="landing-info-college">Military College of Signals (MCS)</p>
+      </div>
+    </div>
+
+    <div class="landing-info-right">
+      <div class="landing-info-cards">
+        <div class="landing-info-card">
+            <i class="fa fa-solid fa-medal"></i>
+            <div class="info-card-text">
+                <p>Semester</p>
+                <h2>5th</h2>
+            </div>
+        </div>
+        <div class="landing-info-card">
+            <i class="fa fa-solid fa-star"></i>
+            <div class="info-card-text">
+                <p>CGPA</p>
+                <h2>3.63</h2>
+            </div>
+        </div>
+        <div class="landing-info-card">
+            <i class="fa fa-solid fa-book-open"></i>
+          <div class="info-card-text">
+            <p>Credit Hours</p>
+            <h2>18</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="landing-body">
+
+    <div class="landing-courses">
+      <div class="course-card">
+
+      </div>
+    </div>
+
+    <div class="landing-graphs">
+      <canvas id="gpa" style="width:100%;max-width:600px"></canvas>
+      <canvas id="attendance" style="max-width:50%;"></canvas>
+    </div>
+
+  </div>
+  
+</div>
+
+
+
+
+
+
+
+
+<script>
+var yValues = [3.6,3.7,3.2,3.8,3.6];
+var xValues = [1,2,3,4,5];
+var yValuesAvg = [3.2,3.3,3.5,2.8,3.2];
+
+new Chart("gpa", {
+  type: "line",
+  data: {
+    labels: xValues,
+    datasets: [{
+      fill: false,
+      lineTension: 0,
+      backgroundColor: "#2f9363",
+      borderColor: "rgba(0,0,255,0.1)",
+      data: yValues
+    }, {
+      fill: false,
+      lineTension: 0,
+      backgroundColor: "#b9cbb5",
+      borderColor: "rgba(0,0,255,0.1)",
+      data: yValuesAvg
+    }]
+  },
+  options: {
+    legend: {display: false},
+    scales: {
+      yAxes: [{ticks: {min: 1, max:4}}],
+    }
+  }
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+<script>
+var xValues = ["Web Engineering", "Operating System", "Professional Ethics", "Technical Writing", "Software Design"];
+var yValues = [85, 98, 90, 75, 79];
+var barColors = ["rgba(170, 227, 226, 0.2", "rgba(114, 134, 211,0.2","rgba(255, 193, 142,0.2", "rgba(170, 203, 115, 0.2","rgba(255, 148, 148, 0.2"];
+  
+  var bgColors = ["rgba(170, 227, 226, 1)", "rgba(114, 134, 211,1)","rgba(255, 193, 142,1)","rgba(170, 203, 115, 1)","rgba(255, 148, 148, 1)"];
+
+new Chart("attendance", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues,
+      borderColor: bgColors,
+      hoverBackgroundColor: bgColors,
+      borderWidth:2,
+      barThickness:8
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "World Wine Production 2018"
+    },
+    scales: {
+
+      yAxes: [{
+        display: true,
+        ticks: {
+          beginAtZero: true,
+          steps: 20,
+          stepValue: 5,
+          max: 100
+        }
+      }],
+      
+
+        xAxes: [{
+            barPercentage: 0.8
+        }]
+    
+    }
+  }
+});
+</script>
+
+
+
+
+
+<%- include("side.ejs") -%> 
+<%- include("footer.ejs") -%>

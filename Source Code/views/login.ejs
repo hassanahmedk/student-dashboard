@@ -1,0 +1,53 @@
+<%- include("header.ejs") -%> 
+
+
+<!-- Round input fields, lighten them -->
+
+<div id="login-screen">
+
+    <div class="landing-login">
+        <img class="deco-svg login-svg-1" src="../public/icons/login-1.svg" alt="">
+    </div>
+
+    <div class="form-login">
+        <img class="deco-svg login-svg-2" src="../public/icons/login-form-1.svg" alt="">
+        <div class="form-login-inner">
+            <form id="login" action="/login" method="post">
+
+                <div class="login-checkbox">
+                    <input type="radio" name="login-dev" class="checkbox-dev">
+                    <label for="login-dev" class="login-checkbox_label label-dev">
+                        <img class="checkbox-img checkbox-img_dev" title="Login as Developer"
+                            src="../public/icons/login-dev.svg" alt="">
+                    </label>
+
+                    <input type="radio" name="login-manager" class="checkbox-manager">
+                    <label for="login-manager" class="login-checkbox_label label-manager">
+                        <img class="checkbox-img checkbox-img_manager" title="Login as Manager"
+                            src="../public/icons/login-manager.svg" alt="">
+                    </label>
+                </div>
+
+                <div class="login-fields">
+                    <p class="login-status"> <%= pLoginStatus %> </p>
+                    <!-- <div class="login-fields-box"> -->
+                    <input class="login-fields-input login-username" placeholder="Enter Manager ID" name="loginUsername" type="text" autocomplete="off">
+                    <!-- <span class="login-placeholder_un">Username</span> -->
+                    <!-- </div> -->
+
+                    <!-- <div class="login-fields-box"> -->
+                    <input class="login-fields-input login-password" placeholder="Enter Password" name="loginPassword" type="password">
+                    <!-- <span class="login-placeholder_pass">Password</span> -->
+                    <!-- </div> -->
+                    <button class="login-button" type="submit">Log me in!</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+
+<%- include("footer.ejs") -%> 
